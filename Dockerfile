@@ -13,6 +13,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.schema-version="1.0.0-rc1"
 
 RUN \
+	apk add --no-cache alpine-baselayout=3.0.4-r0 && \
 	apk -U upgrade && \
 	apk add rsyslog fcron busybox-extras bash bash-completion bind-tools ssmtp curl file wget tar ca-certificates shadow tzdata && \
 	cp /usr/share/zoneinfo/Europe/Copenhagen /etc/localtime && \
