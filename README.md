@@ -19,7 +19,7 @@ Bits and pieces have been sourced from other fine Docker images
 - `SMTP_PASS` - Password for the SMTP relay server
 - `SMTP_PORT` - Outgoing SMTP port, default 587
 - `SMTP_SECURE` - Does the SMTP server requires a secure connection, default TRUE
-- `SMTP_TLS` - Use STARTTLS, default TRUE (if SMTP_TLS is FALSE and SMTP_SECURE is true, SMTP over SSL will be used)
+- `SMTP_TLS` - Use STARTTLS, default TRUE if SMTP_USER is set (if SMTP_TLS is FALSE and SMTP_SECURE is true, SMTP over SSL will be used)
 - `SMTP_MASQ` - Masquerade outbound emails using this domain, default empty
 
 #### Running applications
@@ -56,6 +56,8 @@ RUN \
 #### Email
 
 If you need to send mail and cannot use SMTP directly, ssmtp is installed to provide `/usr/bin/sendmail` and is configured using the `SMTP_` variables.
+
+If SMTP_USER is not set, unauthenticated SMTP will be used and SSL/TLS is disabled.
 
 #### Persistent data
 
