@@ -5,7 +5,7 @@ CONF="/etc/ssmtp/ssmtp.conf"
 : ${SMTP_USER:=''}
 : ${SMTP_PASS:=''}
 : ${SMTP_PORT:='587'}
-: ${SMTP_SECURE:='TRUE'}
+: ${SMTP_SECURE:=''}
 : ${SMTP_TLS:='TRUE'}
 : ${SMTP_MASQ:='example.host'}
 
@@ -22,16 +22,18 @@ AuthPass=$SMTP_PASS
 TLS_CA_Dir=/usr/share/ca-certificates
 EOF
 
-if [[ ! -z $SMTP_USER ]]
+shopt -s nocasematch
+if [[ ! -z $SMTP_USER ]] || [[ $SMTP_SECURE == "true" ]]
  then
-	if [ $SMTP_SECURE == "true" ]
+	: ${SMTP_SECURE:='TRUE'}
+	if [[ $SMTP_SECURE == "TRUE" ]]
 	 then
 		echo "UseTLS=Yes" >> $CONF
 	 else
 		echo "UseTLS=No" >> $CONF
 	fi
 
-	if [ $SMTP_SECURE == "true" -a $SMTP_TLS = "true" ]
+	if [[ $SMTP_SECURE == "true" && $SMTP_TLS = "true" ]]
 	 then
 		echo "UseSTARTTLS=Yes" >> $CONF
 	 else
