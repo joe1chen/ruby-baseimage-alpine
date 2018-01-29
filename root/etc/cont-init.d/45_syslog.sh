@@ -12,7 +12,6 @@ fi
 
 if [[ $DISABLE_SYSLOG == "TRUE" ]]
  then
-	rm -rf /etc/services.d/rsyslog
 	exit 0
 fi
 

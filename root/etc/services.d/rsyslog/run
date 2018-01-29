@@ -1,3 +1,15 @@
 #!/usr/bin/with-contenv bash
+shopt -s nocasematch
+if [[ $DEBUG == "TRUE" ]]
+ then
+        set -x
+fi
 
-exec rsyslogd -n -f /etc/rsyslog.conf
+: ${DISABLE_SYSLOG:="FALSE"}
+
+if [[ $DISABLE_SYSLOG == "TRUE" ]]
+ then
+	s6-svc -d /run/s6/services/rsyslog        
+ else
+	exec rsyslogd -n -f /etc/rsyslog.conf
+fi
