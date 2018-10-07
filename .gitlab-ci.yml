@@ -17,7 +17,7 @@ stages:
 build-master:
  stage: build
  script:
-  - $DB -t $CI_REGISTRY_IMAGE .
+  - for ver in 7 8 ; do $DB -t $CI_REGISTRY_IMAGE:v3.$ver -f Dockerfile.v3.$ver . ; done
   - git config user.email $GITHUB_EMAIL
   - git config user.name $GITHUB_USER
   - git push https://$GITHUB_USER:$GITHUB_TOKEN@github.com/$GITHUB_USER/$CI_PROJECT_NAME.git HEAD:master --force
