@@ -1,5 +1,6 @@
 Alpine baseimage
 ================
+**UPDATE** 2018-10-07 - Possible breakage! I have decided to switch back to using [tagged repositories](https://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management#Repository_pinning). This means you may have to add @repotag to packages not in the main repositories. repo-tags are: `@edge`, `@edgecommunity` and `@testing`
 
 A baseimage based on Alpine 3.x with [Skarnet's s6 process supervision](http://www.skarnet.org/software/s6/) installed from [Just Container's s6 Overlay](https://github.com/just-containers/s6-overlay).
 
